@@ -1,0 +1,118 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddshjbmn8jhtw"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ug0ol"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oiu32"]
+bg_color = Color(0, 0.713726, 0.45098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qycuq"]
+bg_color = Color(0.788235, 0, 0.843137, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ug0ol")
+
+[node name="PrimaryTick" type="Timer" parent="."]
+autostart = true
+
+[node name="SecondaryTick" type="Timer" parent="."]
+autostart = true
+
+[node name="MarginContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+offset_right = 700.0
+offset_bottom = 300.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tick 1"
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_oiu32")
+max_value = 1.0
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tick 2"
+
+[node name="ProgressBar2" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_qycuq")
+max_value = 1.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Resource" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Resource 1"
+
+[node name="ResourceValue1" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "0"
+
+[node name="Resource2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Resource 2"
+
+[node name="ResourceValue2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "0"
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Tick1Faster" type="Button" parent="MarginContainer/HBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Tick #1 Faster"
+
+[node name="Tick1Slower" type="Button" parent="MarginContainer/HBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Tick #1 Slower"
+
+[node name="Tick2Faster" type="Button" parent="MarginContainer/HBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Tick #2 Faster"
+
+[node name="Tick2Slower" type="Button" parent="MarginContainer/HBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Tick #2 Slower"
+
+[node name="Resource1Gain" type="Button" parent="MarginContainer/HBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Resource 1
+Increase"
+
+[node name="Resource2Gain" type="Button" parent="MarginContainer/HBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Resource 2
+Increase"
+
+[connection signal="timeout" from="PrimaryTick" to="." method="_on_primary_tick_timeout"]
+[connection signal="timeout" from="SecondaryTick" to="." method="_on_secondary_tick_timeout"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/GridContainer/Tick1Faster" to="." method="_on_tick_1_faster_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/GridContainer/Tick1Slower" to="." method="_on_tick_1_slower_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/GridContainer/Tick2Faster" to="." method="_on_tick_2_faster_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/GridContainer/Tick2Slower" to="." method="_on_tick_2_slower_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/GridContainer/Resource1Gain" to="." method="_on_resource_1_gain_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/GridContainer/Resource2Gain" to="." method="_on_resource_2_gain_pressed"]
